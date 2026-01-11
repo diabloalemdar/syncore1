@@ -1,0 +1,742 @@
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Code, Zap, Brain, Shield, Cloud, BarChart3, ChevronDown, Mail, Phone, MapPin, Linkedin, Twitter, Github, CheckCircle2, ArrowRight } from 'lucide-react';
+
+// Language Context
+const LanguageContext = createContext();
+const useLanguage = () => useContext(LanguageContext);
+
+// Content Database
+const content = {
+  nav: {
+    home: { tr: 'Ana Sayfa', en: 'Home' },
+    services: { tr: 'Hizmetler', en: 'Services' },
+    work: { tr: 'Projeler', en: 'Work' },
+    about: { tr: 'Hakkımızda', en: 'About' },
+    contact: { tr: 'İletişim', en: 'Contact' },
+    cta: { tr: 'Teklif Al', en: 'Get a Quote' }
+  },
+  hero: {
+    headline: { tr: 'Dijital dönüşümün gücü', en: 'The power of digital transformation' },
+    subheadline: { tr: 'Kurumsal yazılım, otomasyon ve AI çözümleriyle işinizi geleceğe taşıyoruz.', en: 'We elevate your business with enterprise software, automation, and AI solutions.' },
+    cta1: { tr: 'Projelerimiz', en: 'Our Work' },
+    cta2: { tr: 'Görüşme Talep Et', en: 'Request Consultation' }
+  },
+  trust: {
+    title: { tr: 'Güvenilen iş ortağı', en: 'Trusted by' }
+  },
+  servicesHome: {
+    title: { tr: 'Hizmetlerimiz', en: 'Our Services' },
+    items: [
+      {
+        icon: Code,
+        title: { tr: 'Web & Ürün Geliştirme', en: 'Web & Product Development' },
+        desc: { tr: 'Ölçeklenebilir web uygulamaları ve dijital ürünler tasarlıyor, geliştiriyoruz.', en: 'We design and build scalable web applications and digital products.' }
+      },
+      {
+        icon: Zap,
+        title: { tr: 'Otomasyon & Entegrasyonlar', en: 'Automation & Integrations' },
+        desc: { tr: 'İş süreçlerinizi otomatikleştiriyor, sistemlerinizi entegre ediyoruz.', en: 'We automate your workflows and integrate your systems seamlessly.' }
+      },
+      {
+        icon: Brain,
+        title: { tr: 'Yapay Zeka Entegrasyonu', en: 'AI Enablement' },
+        desc: { tr: 'İşletmenize özel AI çözümleri ile verimliliği artırıyoruz.', en: 'We boost efficiency with custom AI solutions for your business.' }
+      },
+      {
+        icon: Shield,
+        title: { tr: 'Siber Güvenlik Temelleri', en: 'Cybersecurity Foundations' },
+        desc: { tr: 'Dijital varlıklarınızı korumak için güvenlik stratejileri geliştiriyoruz.', en: 'We develop security strategies to protect your digital assets.' }
+      },
+      {
+        icon: Cloud,
+        title: { tr: 'Bulut & DevOps', en: 'Cloud & DevOps' },
+        desc: { tr: 'Altyapınızı modernize ediyor, deployment süreçlerinizi optimize ediyoruz.', en: 'We modernize infrastructure and optimize deployment processes.' }
+      },
+      {
+        icon: BarChart3,
+        title: { tr: 'Veri & Analitik', en: 'Data & Analytics' },
+        desc: { tr: 'Verilerinizi anlamlı içgörülere ve aksiyon alabileceğiniz raporlara dönüştürüyoruz.', en: 'We transform data into actionable insights and reports.' }
+      }
+    ]
+  },
+  work: {
+    title: { tr: 'Öne Çıkan Projeler', en: 'Featured Work' },
+    cta: { tr: 'Tüm Projeler', en: 'View All Work' },
+    items: [
+      {
+        title: { tr: 'E-Ticaret Platformu', en: 'E-Commerce Platform' },
+        tag: { tr: 'Web', en: 'Web' },
+        result: { tr: '300% sipariş artışı', en: '300% order increase' },
+        stats: { tr: '2 ay teslimat', en: '2-month delivery' },
+        image: '🛒'
+      },
+      {
+        title: { tr: 'Üretim Otomasyon Sistemi', en: 'Manufacturing Automation' },
+        tag: { tr: 'Otomasyon', en: 'Automation' },
+        result: { tr: '%65 maliyet düşüşü', en: '65% cost reduction' },
+        stats: { tr: '4 hafta kurulum', en: '4-week setup' },
+        image: '⚙️'
+      },
+      {
+        title: { tr: 'AI Müşteri Destek Botu', en: 'AI Customer Support Bot' },
+        tag: { tr: 'Yapay Zeka', en: 'AI' },
+        result: { tr: '%82 çözüm oranı', en: '82% resolution rate' },
+        stats: { tr: '24/7 hizmet', en: '24/7 service' },
+        image: '🤖'
+      }
+    ]
+  },
+  process: {
+    title: { tr: 'Çalışma Sürecimiz', en: 'Our Process' },
+    steps: [
+      { label: { tr: 'Keşif', en: 'Discovery' }, icon: '🔍' },
+      { label: { tr: 'Tasarım', en: 'Design' }, icon: '🎨' },
+      { label: { tr: 'Geliştirme', en: 'Build' }, icon: '⚡' },
+      { label: { tr: 'Yayınlama', en: 'Launch' }, icon: '🚀' },
+      { label: { tr: 'Destek', en: 'Support' }, icon: '🛠️' }
+    ]
+  },
+  testimonials: {
+    title: { tr: 'Müşteri Görüşleri', en: 'Client Testimonials' },
+    items: [
+      {
+        text: { tr: 'SYN Core ekibi, dijital dönüşüm yolculuğumuzda mükemmel bir ortak oldu. Sonuçlar beklentilerimizi aştı.', en: 'SYN Core team was an exceptional partner in our digital transformation journey. Results exceeded expectations.' },
+        name: { tr: 'Ahmet Yılmaz', en: 'Ahmet Yılmaz' },
+        title: { tr: 'CTO, TechCorp', en: 'CTO, TechCorp' },
+        avatar: '👨‍💼'
+      },
+      {
+        text: { tr: 'Otomasyon çözümleri sayesinde operasyonel maliyetlerimizi yarı yarıya düşürdük. Profesyonel ve güvenilir.', en: 'Thanks to automation solutions, we cut operational costs in half. Professional and reliable.' },
+        name: { tr: 'Zeynep Kaya', en: 'Zeynep Kaya' },
+        title: { tr: 'COO, Manufacturing Co', en: 'COO, Manufacturing Co' },
+        avatar: '👩‍💼'
+      },
+      {
+        text: { tr: 'AI entegrasyonu müşteri memnuniyetimizi üst seviyeye taşıdı. Teknik ekip her zaman yanımızda.', en: 'AI integration elevated our customer satisfaction. Technical team always supports us.' },
+        name: { tr: 'Mehmet Arslan', en: 'Mehmet Arslan' },
+        title: { tr: 'CEO, ServiceHub', en: 'CEO, ServiceHub' },
+        avatar: '👔'
+      }
+    ]
+  },
+  faq: {
+    title: { tr: 'Sıkça Sorulan Sorular', en: 'Frequently Asked Questions' },
+    items: [
+      {
+        q: { tr: 'Proje süresi ne kadar?', en: 'How long does a project take?' },
+        a: { tr: 'Proje kapsamına göre değişir. Basit projeler 4-6 hafta, karmaşık sistemler 3-6 ay sürebilir. İlk görüşmede net bir zaman çizelgesi sunuyoruz.', en: 'Depends on scope. Simple projects take 4-6 weeks, complex systems 3-6 months. We provide a clear timeline in initial consultation.' }
+      },
+      {
+        q: { tr: 'Hangi teknolojileri kullanıyorsunuz?', en: 'What technologies do you use?' },
+        a: { tr: 'Modern, güvenilir ve ölçeklenebilir teknolojiler kullanıyoruz: React, Next.js, Node.js, Python, AWS, Azure. Proje ihtiyacına göre en uygun stack\'i seçiyoruz.', en: 'We use modern, reliable, scalable tech: React, Next.js, Node.js, Python, AWS, Azure. We select the best stack for project needs.' }
+      },
+      {
+        q: { tr: 'Destek hizmeti sunuyor musunuz?', en: 'Do you provide support services?' },
+        a: { tr: 'Evet. Proje teslimi sonrası 3 aylık garanti ve opsiyonel sürekli destek paketleri sunuyoruz. SLA\'larımız kesintisiz hizmet sağlar.', en: 'Yes. We offer 3-month warranty post-delivery and optional ongoing support packages. Our SLAs ensure uninterrupted service.' }
+      },
+      {
+        q: { tr: 'Güvenlik nasıl sağlanıyor?', en: 'How do you ensure security?' },
+        a: { tr: 'OWASP standartları, kod incelemeleri, penetrasyon testleri ve sürekli güvenlik güncellemeleri uyguluyoruz. Verileriniz şifrelenir ve korunur.', en: 'We apply OWASP standards, code reviews, penetration testing, and continuous security updates. Your data is encrypted and protected.' }
+      },
+      {
+        q: { tr: 'Mevcut sistemlerle entegre olabiliyor musunuz?', en: 'Can you integrate with existing systems?' },
+        a: { tr: 'Kesinlikle. ERP, CRM, e-ticaret platformları ve özel sistemlerle entegrasyon konusunda deneyimliyiz. API ve middleware çözümleri geliştiriyoruz.', en: 'Absolutely. We have experience integrating with ERP, CRM, e-commerce platforms, and custom systems. We develop API and middleware solutions.' }
+      },
+      {
+        q: { tr: 'Fiyatlandırma nasıl çalışıyor?', en: 'How does pricing work?' },
+        a: { tr: 'Sabit fiyat veya zaman-malzeme modeliyle çalışıyoruz. İlk analiz ücretsizdir. Detaylı teklifimizi proje kapsamı belirlendikten sonra sunuyoruz.', en: 'We work with fixed-price or time-and-materials models. Initial analysis is free. We provide detailed quotes after defining project scope.' }
+      }
+    ]
+  },
+  contactCTA: {
+    title: { tr: 'Projenizi konuşalım', en: 'Let\'s discuss your project' },
+    subtitle: { tr: 'Dijital dönüşüm yolculuğunuza bugün başlayın', en: 'Start your digital transformation journey today' },
+    cta: { tr: 'İletişime Geç', en: 'Get in Touch' }
+  },
+  stats: {
+    items: [
+      { value: '50+', label: { tr: 'Aktif Proje', en: 'Active Projects' } },
+      { value: '98%', label: { tr: 'Müşteri Memnuniyeti', en: 'Client Satisfaction' } },
+      { value: '5Y+', label: { tr: 'Tecrübe', en: 'Experience' } },
+      { value: '24/7', label: { tr: 'Destek', en: 'Support' } }
+    ]
+  },
+  footer: {
+    tagline: { tr: 'Dijital dönüşümün gücü', en: 'The power of digital transformation' },
+    quickLinks: { tr: 'Hızlı Bağlantılar', en: 'Quick Links' },
+    contact: { tr: 'İletişim', en: 'Contact' },
+    email: 'hello@syncore.com',
+    phone: '+90 212 555 0123',
+    address: { tr: 'Maslak, Sarıyer, İstanbul', en: 'Maslak, Sarıyer, Istanbul' },
+    copyright: { tr: '© 2026 SYN Core. Tüm hakları saklıdır.', en: '© 2026 SYN Core. All rights reserved.' }
+  }
+};
+
+// Language Provider
+function LanguageProvider({ children }) {
+  const [lang, setLang] = useState('tr');
+  const t = (obj) => obj?.[lang] || obj?.en || '';
+  
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+// Navbar
+function Navbar() {
+  const { lang, setLang, t } = useLanguage();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <motion.nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-yellow-500/20' : 'bg-transparent'
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg flex items-center justify-center font-bold text-black text-xl">
+            S
+          </div>
+          <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+            SYN Core
+          </div>
+        </div>
+        
+        <div className="hidden md:flex items-center gap-8">
+          {['home', 'services', 'work', 'about', 'contact'].map((item) => (
+            <button
+              key={item}
+              className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
+            >
+              {t(content.nav[item])}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 bg-zinc-900 rounded-full px-3 py-1.5 border border-yellow-500/20">
+            <button
+              onClick={() => setLang('tr')}
+              className={`text-xs font-medium px-2 py-0.5 rounded-full transition-all ${
+                lang === 'tr' ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              TR
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              className={`text-xs font-medium px-2 py-0.5 rounded-full transition-all ${
+                lang === 'en' ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+          
+          <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-5 py-2 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-yellow-500/30 transition-all">
+            {t(content.nav.cta)}
+          </button>
+        </div>
+      </div>
+    </motion.nav>
+  );
+}
+
+// Hero
+function Hero() {
+  const { t } = useLanguage();
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+
+  return (
+    <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-16 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.1),transparent_50%)]" />
+      
+      <motion.div
+        style={{ y }}
+        className="max-w-6xl w-full bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-3xl border border-yellow-500/20 shadow-2xl shadow-yellow-500/10 p-8 md:p-12 overflow-hidden relative z-10"
+      >
+        {/* Gold accent lines */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-500/10 to-transparent rounded-full blur-3xl" />
+        
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-block mb-4 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full">
+              <span className="text-yellow-400 text-sm font-semibold">Premium Digital Solutions</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              {t(content.hero.headline)}
+            </h1>
+            <p className="text-base md:text-lg text-gray-300 mb-8 leading-relaxed">
+              {t(content.hero.subheadline)}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3.5 rounded-full font-bold hover:shadow-lg hover:shadow-yellow-500/40 transition-all flex items-center gap-2">
+                {t(content.hero.cta1)}
+                <ArrowRight size={18} />
+              </button>
+              <button className="bg-white/5 backdrop-blur text-white px-8 py-3.5 rounded-full font-semibold border border-yellow-500/30 hover:bg-white/10 transition-all">
+                {t(content.hero.cta2)}
+              </button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative h-64 md:h-96 bg-gradient-to-br from-yellow-500/10 to-amber-600/10 rounded-2xl overflow-hidden border border-yellow-500/20"
+          >
+            <div className="absolute inset-0 flex items-center justify-center text-8xl">
+              💼
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// Stats Strip
+function StatsStrip() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-16 px-6 border-y border-yellow-500/20 bg-black/50">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {content.stats.items.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="text-center"
+            >
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent mb-2">
+                {stat.value}
+              </div>
+              <div className="text-gray-400 text-sm">{t(stat.label)}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Services
+function ServicesSection() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-24 px-6 bg-gradient-to-b from-black to-zinc-900">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            {t(content.servicesHome.title)}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
+        
+        <div className="grid md:grid-cols-3 gap-6">
+          {content.servicesHome.items.map((service, i) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-8 hover:border-yellow-500/50 transition-all cursor-pointer group relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/5 to-transparent rounded-full blur-2xl" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-yellow-500/30">
+                    <Icon className="text-yellow-400" size={28} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">
+                    {t(service.title)}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {t(service.desc)}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Featured Work
+function FeaturedWork() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-24 px-6 bg-zinc-900">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            {t(content.work.title)}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
+        
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {content.work.items.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="group cursor-pointer"
+            >
+              <div className="relative h-64 bg-gradient-to-br from-zinc-800 to-black rounded-2xl overflow-hidden mb-4 border border-yellow-500/20 group-hover:border-yellow-500/50 transition-all">
+                <div className="absolute inset-0 flex items-center justify-center text-8xl">
+                  {item.image}
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute top-4 right-4">
+                  <span className="bg-yellow-500/20 text-yellow-400 text-xs px-3 py-1 rounded-full border border-yellow-500/50 font-semibold">
+                    {t(item.tag)}
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="flex items-center gap-2 text-yellow-400 text-sm mb-2">
+                    <CheckCircle2 size={16} />
+                    <span>{t(item.stats)}</span>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                {t(item.title)}
+              </h3>
+              <p className="text-gray-400 text-sm font-semibold">
+                {t(item.result)}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="text-center">
+          <button className="bg-white/5 backdrop-blur text-white px-8 py-3 rounded-full font-semibold border border-yellow-500/30 hover:bg-white/10 transition-all inline-flex items-center gap-2">
+            {t(content.work.cta)}
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Process
+function ProcessTimeline() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-24 px-6 bg-black">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            {t(content.process.title)}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
+        
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
+          {content.process.steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="flex flex-col items-center text-center flex-1"
+            >
+              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-500/50 text-3xl">
+                {step.icon}
+              </div>
+              <span className="text-sm text-yellow-400 font-bold mb-2">{i + 1}</span>
+              <p className="text-white font-semibold">{t(step.label)}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Testimonials
+function Testimonials() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-24 px-6 bg-zinc-900">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            {t(content.testimonials.title)}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {content.testimonials.items.map((testimonial, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-gradient-to-br from-zinc-900 to-black backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-8 relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 text-6xl opacity-10">💬</div>
+              <div className="relative z-10">
+                <div className="text-5xl mb-4">{testimonial.avatar}</div>
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">
+                  "{t(testimonial.text)}"
+                </p>
+                <div>
+                  <p className="text-white font-bold">{t(testimonial.name)}</p>
+                  <p className="text-yellow-400 text-sm">{t(testimonial.title)}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// FAQ
+function FAQ() {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(null);
+  
+  return (
+    <section className="py-24 px-6 bg-black">
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            {t(content.faq.title)}
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
+        
+        <div className="space-y-4">
+          {content.faq.items.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="bg-zinc-900/50 backdrop-blur-xl rounded-xl border border-yellow-500/20 overflow-hidden hover:border-yellow-500/40 transition-all"
+            >
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                className="w-full px-6 md:px-8 py-5 flex items-center justify-between text-left hover:bg-yellow-500/5 transition-colors"
+              >
+                <span className="text-white font-semibold pr-8 text-sm md:text-base">{t(item.q)}</span>
+                <ChevronDown 
+                  className={`text-yellow-400 transition-transform ${open === i ? 'rotate-180' : ''}`}
+                  size={20}
+                />
+              </button>
+              <AnimatePresence>
+                {open === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 md:px-8 pb-5 text-gray-400 text-sm leading-relaxed border-t border-yellow-500/10">
+                      <div className="pt-4">{t(item.a)}</div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Contact CTA
+function ContactCTA() {
+  const { t } = useLanguage();
+  
+  return (
+    <section className="py-24 px-6 bg-zinc-900">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="max-w-4xl mx-auto bg-gradient-to-r from-yellow-400/10 to-amber-500/10 rounded-3xl border border-yellow-500/30 p-8 md:p-12 text-center relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent" />
+        <div className="relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            {t(content.contactCTA.title)}
+          </h2>
+          <p className="text-gray-300 text-lg mb-8">
+            {t(content.contactCTA.subtitle)}
+          </p>
+          <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-yellow-500/40 transition-all inline-flex items-center gap-2">
+            {t(content.contactCTA.cta)}
+            <ArrowRight size={20} />
+          </button>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// Footer
+function Footer() {
+  const { t } = useLanguage();
+  
+  return (
+    <footer className="bg-black border-t border-yellow-500/20 py-16 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg flex items-center justify-center font-bold text-black text-xl">
+                S
+              </div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                SYN Core
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm mb-6">
+              {t(content.footer.tagline)}
+            </p>
+            <div className="flex gap-4">
+              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Linkedin className="text-yellow-400" size={18} />
+              </div>
+              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Twitter className="text-yellow-400" size={18} />
+              </div>
+              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Github className="text-yellow-400" size={18} />
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-white font-bold mb-4">{t(content.footer.quickLinks)}</h3>
+            <div className="space-y-2">
+              {['home', 'services', 'work', 'about', 'contact'].map((item) => (
+                <button key={item} className="block text-gray-400 text-sm hover:text-yellow-400 transition-colors">
+                  {t(content.nav[item])}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-white font-bold mb-4">{t(content.footer.contact)}</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center gap-2 text-gray-400">
+                <Mail size={16} className="text-yellow-400" />
+                <span>{content.footer.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <Phone size={16} className="text-yellow-400" />
+                <span>{content.footer.phone}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <MapPin size={16} className="text-yellow-400" />
+                <span>{t(content.footer.address)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="border-t border-yellow-500/20 pt-8 text-center text-gray-500 text-sm">
+          {t(content.footer.copyright)}
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// Main App
+export default function App() {
+  return (
+    <LanguageProvider>
+      <div className="bg-black min-h-screen text-white">
+        <Navbar />
+        <Hero />
+        <StatsStrip />
+        <ServicesSection />
+        <FeaturedWork />
+        <ProcessTimeline />
+        <Testimonials />
+        <FAQ />
+        <ContactCTA />
+        <Footer />
+      </div>
+    </LanguageProvider>
+  );
+}
