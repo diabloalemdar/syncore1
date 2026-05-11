@@ -199,7 +199,7 @@ function Navbar() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-yellow-500/20' : 'bg-transparent'
+        scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-violet-500/20' : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -207,10 +207,10 @@ function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg flex items-center justify-center font-bold text-black text-xl">
+          <div className="w-10 h-10 bg-gradient-to-br from-violet-400 to-purple-700 rounded-lg flex items-center justify-center font-bold text-black text-xl">
             S
           </div>
-          <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+          <div className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
             SYN Core
           </div>
         </div>
@@ -219,7 +219,7 @@ function Navbar() {
           {['home', 'services', 'work', 'about', 'contact'].map((item) => (
             <button
               key={item}
-              className="text-sm text-gray-300 hover:text-yellow-400 transition-colors"
+              className="text-sm text-gray-300 hover:text-violet-400 transition-colors"
             >
               {t(content.nav[item])}
             </button>
@@ -227,11 +227,11 @@ function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 bg-zinc-900 rounded-full px-3 py-1.5 border border-yellow-500/20">
+          <div className="flex items-center gap-2 bg-zinc-900 rounded-full px-3 py-1.5 border border-violet-500/20">
             <button
               onClick={() => setLang('tr')}
               className={`text-xs font-medium px-2 py-0.5 rounded-full transition-all ${
-                lang === 'tr' ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black' : 'text-gray-400 hover:text-white'
+                lang === 'tr' ? 'bg-gradient-to-r from-violet-400 to-purple-600 text-black' : 'text-gray-400 hover:text-white'
               }`}
             >
               TR
@@ -239,14 +239,14 @@ function Navbar() {
             <button
               onClick={() => setLang('en')}
               className={`text-xs font-medium px-2 py-0.5 rounded-full transition-all ${
-                lang === 'en' ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black' : 'text-gray-400 hover:text-white'
+                lang === 'en' ? 'bg-gradient-to-r from-violet-400 to-purple-600 text-black' : 'text-gray-400 hover:text-white'
               }`}
             >
               EN
             </button>
           </div>
           
-          <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-5 py-2 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-yellow-500/30 transition-all">
+          <button className="bg-gradient-to-r from-violet-400 to-purple-600 text-black px-5 py-2 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-violet-500/30 transition-all">
             {t(content.nav.cta)}
           </button>
         </div>
@@ -265,15 +265,15 @@ function Hero() {
     <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-16 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(124,58,237,0.1),transparent_50%)]" />
       
       <motion.div
         style={{ y }}
-        className="max-w-6xl w-full bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-3xl border border-yellow-500/20 shadow-2xl shadow-yellow-500/10 p-8 md:p-12 overflow-hidden relative z-10"
+        className="max-w-6xl w-full bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-3xl border border-violet-500/20 shadow-2xl shadow-violet-500/10 p-8 md:p-12 overflow-hidden relative z-10"
       >
         {/* Gold accent lines */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-500/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-violet-400/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-600/10 to-transparent rounded-full blur-3xl" />
         
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
           <motion.div
@@ -281,8 +281,8 @@ function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-block mb-4 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full">
-              <span className="text-yellow-400 text-sm font-semibold">Premium Digital Solutions</span>
+            <div className="inline-block mb-4 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full">
+              <span className="text-violet-400 text-sm font-semibold">Premium Digital Solutions</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               {t(content.hero.headline)}
@@ -291,11 +291,11 @@ function Hero() {
               {t(content.hero.subheadline)}
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3.5 rounded-full font-bold hover:shadow-lg hover:shadow-yellow-500/40 transition-all flex items-center gap-2">
+              <button className="bg-gradient-to-r from-violet-400 to-purple-600 text-black px-8 py-3.5 rounded-full font-bold hover:shadow-lg hover:shadow-violet-500/40 transition-all flex items-center gap-2">
                 {t(content.hero.cta1)}
                 <ArrowRight size={18} />
               </button>
-              <button className="bg-white/5 backdrop-blur text-white px-8 py-3.5 rounded-full font-semibold border border-yellow-500/30 hover:bg-white/10 transition-all">
+              <button className="bg-white/5 backdrop-blur text-white px-8 py-3.5 rounded-full font-semibold border border-violet-500/30 hover:bg-white/10 transition-all">
                 {t(content.hero.cta2)}
               </button>
             </div>
@@ -305,7 +305,7 @@ function Hero() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-64 md:h-96 bg-gradient-to-br from-yellow-500/10 to-amber-600/10 rounded-2xl overflow-hidden border border-yellow-500/20"
+            className="relative h-64 md:h-96 bg-gradient-to-br from-violet-500/10 to-purple-700/10 rounded-2xl overflow-hidden border border-violet-500/20"
           >
             <div className="absolute inset-0 flex items-center justify-center text-8xl">
               💼
@@ -323,7 +323,7 @@ function StatsStrip() {
   const { t } = useLanguage();
   
   return (
-    <section className="py-16 px-6 border-y border-yellow-500/20 bg-black/50">
+    <section className="py-16 px-6 border-y border-violet-500/20 bg-black/50">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {content.stats.items.map((stat, i) => (
@@ -335,7 +335,7 @@ function StatsStrip() {
               transition={{ delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent mb-2">
                 {stat.value}
               </div>
               <div className="text-gray-400 text-sm">{t(stat.label)}</div>
@@ -363,7 +363,7 @@ function ServicesSection() {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             {t(content.servicesHome.title)}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-400 to-purple-600 mx-auto rounded-full" />
         </motion.div>
         
         <div className="grid md:grid-cols-3 gap-6">
@@ -377,12 +377,12 @@ function ServicesSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-8 hover:border-yellow-500/50 transition-all cursor-pointer group relative overflow-hidden"
+                className="bg-gradient-to-br from-zinc-900/80 to-black/80 backdrop-blur-xl rounded-2xl border border-violet-500/20 p-8 hover:border-violet-500/50 transition-all cursor-pointer group relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/5 to-transparent rounded-full blur-2xl" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-violet-400/5 to-transparent rounded-full blur-2xl" />
                 <div className="relative z-10">
-                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-yellow-500/30">
-                    <Icon className="text-yellow-400" size={28} />
+                  <div className="w-14 h-14 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-violet-500/30">
+                    <Icon className="text-violet-400" size={28} />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">
                     {t(service.title)}
@@ -416,7 +416,7 @@ function FeaturedWork() {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             {t(content.work.title)}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-400 to-purple-600 mx-auto rounded-full" />
         </motion.div>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -429,24 +429,24 @@ function FeaturedWork() {
               transition={{ delay: i * 0.15 }}
               className="group cursor-pointer"
             >
-              <div className="relative h-64 bg-gradient-to-br from-zinc-800 to-black rounded-2xl overflow-hidden mb-4 border border-yellow-500/20 group-hover:border-yellow-500/50 transition-all">
+              <div className="relative h-64 bg-gradient-to-br from-zinc-800 to-black rounded-2xl overflow-hidden mb-4 border border-violet-500/20 group-hover:border-violet-500/50 transition-all">
                 <div className="absolute inset-0 flex items-center justify-center text-8xl">
                   {item.image}
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-yellow-500/20 text-yellow-400 text-xs px-3 py-1 rounded-full border border-yellow-500/50 font-semibold">
+                  <span className="bg-violet-500/20 text-violet-400 text-xs px-3 py-1 rounded-full border border-violet-500/50 font-semibold">
                     {t(item.tag)}
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <div className="flex items-center gap-2 text-yellow-400 text-sm mb-2">
+                  <div className="flex items-center gap-2 text-violet-400 text-sm mb-2">
                     <CheckCircle2 size={16} />
                     <span>{t(item.stats)}</span>
                   </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-violet-400 transition-colors">
                 {t(item.title)}
               </h3>
               <p className="text-gray-400 text-sm font-semibold">
@@ -457,7 +457,7 @@ function FeaturedWork() {
         </div>
         
         <div className="text-center">
-          <button className="bg-white/5 backdrop-blur text-white px-8 py-3 rounded-full font-semibold border border-yellow-500/30 hover:bg-white/10 transition-all inline-flex items-center gap-2">
+          <button className="bg-white/5 backdrop-blur text-white px-8 py-3 rounded-full font-semibold border border-violet-500/30 hover:bg-white/10 transition-all inline-flex items-center gap-2">
             {t(content.work.cta)}
             <ArrowRight size={18} />
           </button>
@@ -483,7 +483,7 @@ function ProcessTimeline() {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             {t(content.process.title)}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-400 to-purple-600 mx-auto rounded-full" />
         </motion.div>
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
@@ -496,10 +496,10 @@ function ProcessTimeline() {
               transition={{ delay: i * 0.1 }}
               className="flex flex-col items-center text-center flex-1"
             >
-              <div className="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-500/50 text-3xl">
+              <div className="w-20 h-20 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-full flex items-center justify-center mb-4 border-2 border-violet-500/50 text-3xl">
                 {step.icon}
               </div>
-              <span className="text-sm text-yellow-400 font-bold mb-2">{i + 1}</span>
+              <span className="text-sm text-violet-400 font-bold mb-2">{i + 1}</span>
               <p className="text-white font-semibold">{t(step.label)}</p>
             </motion.div>
           ))}
@@ -525,7 +525,7 @@ function Testimonials() {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             {t(content.testimonials.title)}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-400 to-purple-600 mx-auto rounded-full" />
         </motion.div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -536,7 +536,7 @@ function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-gradient-to-br from-zinc-900 to-black backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-8 relative overflow-hidden"
+              className="bg-gradient-to-br from-zinc-900 to-black backdrop-blur-xl rounded-2xl border border-violet-500/20 p-8 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 text-6xl opacity-10">💬</div>
               <div className="relative z-10">
@@ -546,7 +546,7 @@ function Testimonials() {
                 </p>
                 <div>
                   <p className="text-white font-bold">{t(testimonial.name)}</p>
-                  <p className="text-yellow-400 text-sm">{t(testimonial.title)}</p>
+                  <p className="text-violet-400 text-sm">{t(testimonial.title)}</p>
                 </div>
               </div>
             </motion.div>
@@ -574,7 +574,7 @@ function FAQ() {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             {t(content.faq.title)}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-violet-400 to-purple-600 mx-auto rounded-full" />
         </motion.div>
         
         <div className="space-y-4">
@@ -585,15 +585,15 @@ function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="bg-zinc-900/50 backdrop-blur-xl rounded-xl border border-yellow-500/20 overflow-hidden hover:border-yellow-500/40 transition-all"
+              className="bg-zinc-900/50 backdrop-blur-xl rounded-xl border border-violet-500/20 overflow-hidden hover:border-violet-500/40 transition-all"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full px-6 md:px-8 py-5 flex items-center justify-between text-left hover:bg-yellow-500/5 transition-colors"
+                className="w-full px-6 md:px-8 py-5 flex items-center justify-between text-left hover:bg-violet-500/5 transition-colors"
               >
                 <span className="text-white font-semibold pr-8 text-sm md:text-base">{t(item.q)}</span>
                 <ChevronDown 
-                  className={`text-yellow-400 transition-transform ${open === i ? 'rotate-180' : ''}`}
+                  className={`text-violet-400 transition-transform ${open === i ? 'rotate-180' : ''}`}
                   size={20}
                 />
               </button>
@@ -606,7 +606,7 @@ function FAQ() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 md:px-8 pb-5 text-gray-400 text-sm leading-relaxed border-t border-yellow-500/10">
+                    <div className="px-6 md:px-8 pb-5 text-gray-400 text-sm leading-relaxed border-t border-violet-500/10">
                       <div className="pt-4">{t(item.a)}</div>
                     </div>
                   </motion.div>
@@ -630,9 +630,9 @@ function ContactCTA() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-4xl mx-auto bg-gradient-to-r from-yellow-400/10 to-amber-500/10 rounded-3xl border border-yellow-500/30 p-8 md:p-12 text-center relative overflow-hidden"
+        className="max-w-4xl mx-auto bg-gradient-to-r from-violet-400/10 to-purple-600/10 rounded-3xl border border-violet-500/30 p-8 md:p-12 text-center relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-400/5 to-transparent" />
         <div className="relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t(content.contactCTA.title)}
@@ -640,7 +640,7 @@ function ContactCTA() {
           <p className="text-gray-300 text-lg mb-8">
             {t(content.contactCTA.subtitle)}
           </p>
-          <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-yellow-500/40 transition-all inline-flex items-center gap-2">
+          <button className="bg-gradient-to-r from-violet-400 to-purple-600 text-black px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-violet-500/40 transition-all inline-flex items-center gap-2">
             {t(content.contactCTA.cta)}
             <ArrowRight size={20} />
           </button>
@@ -655,15 +655,15 @@ function Footer() {
   const { t } = useLanguage();
   
   return (
-    <footer className="bg-black border-t border-yellow-500/20 py-16 px-6">
+    <footer className="bg-black border-t border-violet-500/20 py-16 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg flex items-center justify-center font-bold text-black text-xl">
+              <div className="w-10 h-10 bg-gradient-to-br from-violet-400 to-purple-700 rounded-lg flex items-center justify-center font-bold text-black text-xl">
                 S
               </div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
                 SYN Core
               </div>
             </div>
@@ -671,14 +671,14 @@ function Footer() {
               {t(content.footer.tagline)}
             </p>
             <div className="flex gap-4">
-              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
-                <Linkedin className="text-yellow-400" size={18} />
+              <div className="w-10 h-10 bg-zinc-900 border border-violet-500/30 rounded-lg hover:bg-violet-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Linkedin className="text-violet-400" size={18} />
               </div>
-              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
-                <Twitter className="text-yellow-400" size={18} />
+              <div className="w-10 h-10 bg-zinc-900 border border-violet-500/30 rounded-lg hover:bg-violet-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Twitter className="text-violet-400" size={18} />
               </div>
-              <div className="w-10 h-10 bg-zinc-900 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/10 transition-colors cursor-pointer flex items-center justify-center">
-                <Github className="text-yellow-400" size={18} />
+              <div className="w-10 h-10 bg-zinc-900 border border-violet-500/30 rounded-lg hover:bg-violet-500/10 transition-colors cursor-pointer flex items-center justify-center">
+                <Github className="text-violet-400" size={18} />
               </div>
             </div>
           </div>
@@ -687,7 +687,7 @@ function Footer() {
             <h3 className="text-white font-bold mb-4">{t(content.footer.quickLinks)}</h3>
             <div className="space-y-2">
               {['home', 'services', 'work', 'about', 'contact'].map((item) => (
-                <button key={item} className="block text-gray-400 text-sm hover:text-yellow-400 transition-colors">
+                <button key={item} className="block text-gray-400 text-sm hover:text-violet-400 transition-colors">
                   {t(content.nav[item])}
                 </button>
               ))}
@@ -698,22 +698,22 @@ function Footer() {
             <h3 className="text-white font-bold mb-4">{t(content.footer.contact)}</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-2 text-gray-400">
-                <Mail size={16} className="text-yellow-400" />
+                <Mail size={16} className="text-violet-400" />
                 <span>{content.footer.email}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
-                <Phone size={16} className="text-yellow-400" />
+                <Phone size={16} className="text-violet-400" />
                 <span>{content.footer.phone}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
-                <MapPin size={16} className="text-yellow-400" />
+                <MapPin size={16} className="text-violet-400" />
                 <span>{t(content.footer.address)}</span>
               </div>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-yellow-500/20 pt-8 text-center text-gray-500 text-sm">
+        <div className="border-t border-violet-500/20 pt-8 text-center text-gray-500 text-sm">
           {t(content.footer.copyright)}
         </div>
       </div>
