@@ -1,0 +1,42 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Velvet",
+    "theme_version": "1.0.0",
+    "theme_author": "Velvet Boutique",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Renkler",
+    "settings": [
+      { "type": "color", "id": "color_blush", "label": "Pudra Pembesi",  "default": "#F8E8EE" },
+      { "type": "color", "id": "color_cream", "label": "Krem",           "default": "#F5EBE0" },
+      { "type": "color", "id": "color_rose",  "label": "Gül Kurusu",     "default": "#C9A0A0" },
+      { "type": "color", "id": "color_deep",  "label": "Koyu Kahve",     "default": "#3D2B2B" }
+    ]
+  },
+  {
+    "name": "Tipografi",
+    "settings": [
+      { "type": "font_picker", "id": "font_heading", "label": "Başlık Fontu", "default": "playfair_display_n4" },
+      { "type": "font_picker", "id": "font_body",    "label": "Metin Fontu",  "default": "dm_sans_n4" }
+    ]
+  },
+  {
+    "name": "Kargo & Gizlilik",
+    "settings": [
+      { "type": "text",     "id": "billing_name",        "label": "Tarafsız Fatura İsmi",      "default": "VB Commerce Ltd." },
+      { "type": "checkbox", "id": "show_privacy_badges", "label": "Gizlilik Rozetlerini Göster", "default": true },
+      { "type": "text",     "id": "free_shipping_min",   "label": "Ücretsiz Kargo Minimum (TL)", "default": "500" }
+    ]
+  },
+  {
+    "name": "Sosyal Medya",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_tiktok",    "label": "TikTok URL" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest URL" }
+    ]
+  }
+]

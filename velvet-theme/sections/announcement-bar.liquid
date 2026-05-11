@@ -1,0 +1,33 @@
+<div class="announcement-bar">
+  <div class="announcement-bar__track">
+    {%- assign items = "🌹 Ücretsiz Kargo — 500 TL Üzeri|🔒 %100 Gizli Paketleme|↩️ 30 Gün Koşulsuz İade|💳 Tarafsız Fatura Garantisi|✨ Premium & Sertifikalı Ürünler|🚀 Hızlı & Gizli Teslimat" | split: "|" -%}
+    {%- for item in items -%}
+      <span class="announcement-bar__item">{{ item }}</span>
+      <span class="announcement-bar__sep">◆</span>
+    {%- endfor -%}
+    {%- for item in items -%}
+      <span class="announcement-bar__item">{{ item }}</span>
+      <span class="announcement-bar__sep">◆</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message_1",
+      "label": "Mesaj 1",
+      "default": "🌹 Ücretsiz Kargo — 500 TL Üzeri"
+    },
+    {
+      "type": "text",
+      "id": "message_2",
+      "label": "Mesaj 2",
+      "default": "🔒 %100 Gizli Paketleme"
+    }
+  ]
+}
+{% endschema %}

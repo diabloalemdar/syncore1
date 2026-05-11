@@ -1,0 +1,48 @@
+<div class="age-gate" id="age-gate">
+  <div class="age-gate__card">
+    <div class="age-gate__logo">Vel<span>v</span>et</div>
+    <div class="age-gate__divider"></div>
+    <h2 class="age-gate__title">Yaş Doğrulaması</h2>
+    <p class="age-gate__text">
+      Bu site yalnızca <strong>18 yaş ve üzeri</strong> bireyler için tasarlanmıştır.<br>
+      Lütfen yaşınızı doğrulayın.
+    </p>
+    <div class="age-gate__actions">
+      <button class="age-gate__confirm" onclick="velvetAgeConfirm()">
+        Evet, 18 yaşında veya daha büyüğüm
+      </button>
+      <button class="age-gate__deny" onclick="velvetAgeDeny()">
+        Hayır, bu siteye giremem
+      </button>
+    </div>
+    <p class="age-gate__disclaimer">
+      Bu siteye giriş yaparak 18 yaşında veya daha büyük olduğunuzu ve yetişkin içeriğe yasal olarak erişebildiğinizi kabul etmiş olursunuz.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (localStorage.getItem('velvet_age_ok') === '1') {
+      document.getElementById('age-gate').style.display = 'none';
+    }
+  })();
+
+  function velvetAgeConfirm() {
+    localStorage.setItem('velvet_age_ok', '1');
+    var el = document.getElementById('age-gate');
+    el.classList.add('hidden');
+    setTimeout(function () { el.style.display = 'none'; }, 500);
+  }
+
+  function velvetAgeDeny() {
+    window.location.href = 'https://www.google.com';
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Age Gate",
+  "settings": []
+}
+{% endschema %}
