@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "Premium Çift Butiği",
+        "cta1_text": "Koleksiyonu Keşfet",
+        "cta2_text": "Hakkımızda"
+      }
+    },
+    "trust-bar": {
+      "type": "trust-bar",
+      "settings": {}
+    }
+  },
+  "order": ["hero-banner", "trust-bar"]
+}
